@@ -1,5 +1,6 @@
 ﻿using BotTest2.Models;
 using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace BotTest2
 {
     class Program
     {
+
         public DbContext Db { get; set; }
         public IList<User> Users { get; set; }
         public Timer _timer { get; set; }
@@ -23,8 +25,10 @@ namespace BotTest2
         {
             client = new DiscordSocketClient();
             client.Log += Log;
-            client.MessageReceived += MessageReceived;
+            client.MessageReceived += HandleCommand;
+            client.UserJoined += UpdateUser;
             client.Ready += OnReady;
+
             Db = new DbContext();
             Users = Db.Users;
             string token = "Mzk5ODc3OTI5NDM5MzMwMzA2.DX5_cQ.lDQUWxs6hs-jcY2LiCibsG54azw";
@@ -42,35 +46,56 @@ namespace BotTest2
 
 
 
-            _timer = new Timer(async _ =>
-                {
-                    foreach (var channel in client.Guilds.Select(g => g.DefaultChannel))
-                    {
-                        await channel.SendMessageAsync("Hello thereeeee");
-                    }
+            //_timer = new Timer(async _ =>
+            //    {
+            //        foreach (var channel in client.Guilds.Select(g => g.DefaultChannel))
+            //        {
+            //            await channel.SendMessageAsync("Hello thereeeee");
+            //        }
 
 
 
-                },
-                state: null,
-                dueTime: TimeSpan.FromSeconds(0),
-                period: TimeSpan.FromSeconds(1)
-            );
+            //    },
+            //    state: null,
+            //    dueTime: TimeSpan.FromSeconds(0),
+            //    period: TimeSpan.FromSeconds(1)
+            //);
 
 
 
 
         }
-        private async Task MessageReceived(SocketMessage message)
+        public async Task HandleCommand(SocketMessage messageParam)
         {
-            if (message.Content == "!ping")
+            // Don't process the command if it was a System Message
+            var message = messageParam as SocketUserMessage;
+
+            if (message == null) return;
+            // Create a number to track where the prefix ends and the command begins
+            int argPos = 0;
+            // Determine if the message is a command, based on if it starts with '!' or a mention prefix
+            if (!(message.HasCharPrefix('!', ref argPos) || message.HasMentionPrefix(client.CurrentUser, ref argPos))) return;
+            string[] args = message.Content.Split();
+            string command = args[0];
+            switch (command)
             {
-                await message.Channel.SendMessageAsync("Pongggg!");
+                case "!ping":
+                    await message.Channel.SendMessageAsync("pong!");
+                    break;
+                case "!myow":
+                    if (Users.First(u => u.Id == message.Author.Id.ToString()) == null)
+                    {
+                        await message.Channel.SendMessageAsync("You currently don't have an overwatch profile");
+                    }
+                    break;
             }
 
+            
+        }
+        public async Task UpdateUser(SocketGuildUser user)
+        {
 
         }
-
         private Task Log(LogMessage msg)
         {
             Console.WriteLine(msg.ToString());
