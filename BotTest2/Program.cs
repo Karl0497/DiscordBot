@@ -85,7 +85,7 @@ namespace BotTest2
                 case "!myow":
                     if (Users.First(u => u.Id == message.Author.Id.ToString()) == null)
                     {
-                        await message.Channel.SendMessageAsync("You currently don't haveeeeeee an overwatch profile");
+                        await message.Channel.SendMessageAsync("You currently don't haveeeeeeeee an overwatch profile");
                     }
                     break;
             }
