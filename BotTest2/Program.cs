@@ -46,7 +46,7 @@ namespace BotTest2
                 {
                     foreach (var channel in client.Guilds.Select(g => g.DefaultChannel))
                     {
-                        await channel.SendMessageAsync("Hello there");
+                        await channel.SendMessageAsync("Hello thereeeee");
                     }
 
 
