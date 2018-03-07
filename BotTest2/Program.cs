@@ -14,7 +14,7 @@ namespace BotTest2
     {
 
         public DbContext Db { get; set; }
-        public IList<User> Users { get; set; }
+        public List<User> Users { get; set; }
         public Timer _timer { get; set; }
         public DiscordSocketClient client { get; set; }
 
@@ -38,13 +38,25 @@ namespace BotTest2
 
             // Block this task until the program is closed.
             await Task.Delay(-1);
-
+            
         }
         private async Task OnReady()
         {
+            var UsersInClient = client.Guilds.SelectMany(g => g.Users).Where(u=>!u.IsBot);
+            
 
-
-
+            foreach (var user in UsersInClient)
+            {
+                if (!Users.Select(u=>u.Id).Contains(user.Id.ToString()))
+                {
+                    Users.Add(new User
+                    {
+                        Id = user.Id.ToString()
+                    }
+                    );
+                }
+            }
+            Db.writeObject(Users);
 
             //_timer = new Timer(async _ =>
             //    {
@@ -61,15 +73,15 @@ namespace BotTest2
             //    period: TimeSpan.FromSeconds(1)
             //);
 
-
+       
 
 
         }
+     
         public async Task HandleCommand(SocketMessage messageParam)
         {
             // Don't process the command if it was a System Message
             var message = messageParam as SocketUserMessage;
-
             if (message == null) return;
             // Create a number to track where the prefix ends and the command begins
             int argPos = 0;
@@ -82,19 +94,31 @@ namespace BotTest2
                 case "!ping":
                     await message.Channel.SendMessageAsync("pong!");
                     break;
-                case "!myow":
-                    if (Users.First(u => u.Id == message.Author.Id.ToString()) == null)
+                case "!owprofile":
+
+                    if (Users.First(u => u.Id == message.Author.Id.ToString()).OverwatchProfile == null)
                     {
-                        await message.Channel.SendMessageAsync("You currently don't haveeeeeeeee an overwatch profile");
+                        await message.Channel.SendMessageAsync("You currently don't have an overwatch profile");
                     }
                     break;
+                
             }
 
             
         }
         public async Task UpdateUser(SocketGuildUser user)
         {
-
+            
+            if (Users.Select(t => t.Id).Contains(user.Id.ToString()) | user.IsBot){
+                return;
+            }
+            User u = new User
+            {
+                Id = user.Id.ToString()
+            };
+            Users.Add(u);
+            Db.writeObject(Users);
+            
         }
         private Task Log(LogMessage msg)
         {

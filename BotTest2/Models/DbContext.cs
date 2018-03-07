@@ -10,17 +10,21 @@ namespace BotTest2.Models
     class DbContext
     {
         public List<User> Users { get; set; }
+        public string path { get; set; }
         public DbContext(){
+            path = "../../../data.txt";
             Users = readObject();
+            
         }
 
         public List<User> readObject()
         {
             List<User> result;
-            if (!File.Exists("data.txt")){
+            if (!File.Exists(path)){
+          
                 writeObject(new List<User>());
             }
-            using (StreamReader file = new StreamReader("data.txt"))
+            using (StreamReader file = new StreamReader(path))
             {
                 result = JsonConvert.DeserializeObject<List<User>>(file.ReadToEnd());
                 file.Close();
@@ -29,7 +33,7 @@ namespace BotTest2.Models
         }
         public void writeObject(List<User> myObj)
         {
-            using (StreamWriter myFile = new StreamWriter("data.txt"))
+            using (StreamWriter myFile = new StreamWriter(path))
             {
                 myFile.WriteLine(JsonConvert.SerializeObject(myObj));
             }
