@@ -1,1 +1,1 @@
-[{"Id":"330498951109410817","OverwatchProfile":null},{"Id":"275861365951037440","OverwatchProfile":null}]
+[{"Id":"330498951109410817","OverwatchProfile":{"BattleTag":"Karl#1194"}},{"Id":"275861365951037440","OverwatchProfile":null}]
