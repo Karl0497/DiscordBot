@@ -6,6 +6,7 @@ namespace BotTest2.Datas
 {
     public static class Constants
     {
+        public static char PREFIX = '!';
         public static Dictionary<int, long[]> LEVEL_IDS = new Dictionary<int, long[]>
         {
           {

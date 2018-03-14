@@ -7,10 +7,10 @@ using System.Text;
 namespace BotTest2.Models
 {
  
-    class User
+    public class User
     {
        
-        public string Id { get; set; }
+        public ulong Id { get; set; }
         public OverwatchProfile OverwatchProfile { get; set; }
 
     }

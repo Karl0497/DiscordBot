@@ -5,7 +5,7 @@ using System.Text;
 namespace BotTest2.Models
 {   
     
-    class OverwatchProfile
+    public class OverwatchProfile
     {
         public string BattleTag { get; set; }
         

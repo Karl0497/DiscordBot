@@ -7,11 +7,12 @@ using System.Text;
 
 namespace BotTest2.Models
 {
-    class DbContext
+    public class DbContext
     {
         public List<User> Users { get; set; }
         public string path { get; set; }
         public DbContext(){
+          
             path = "../../../data.txt";
             Users = readObject();
             
@@ -21,8 +22,9 @@ namespace BotTest2.Models
         {
             List<User> result;
             if (!File.Exists(path)){
-          
-                writeObject(new List<User>());
+
+                Users = new List<User>();
+                SaveChanges();
             }
             using (StreamReader file = new StreamReader(path))
             {
@@ -31,11 +33,11 @@ namespace BotTest2.Models
             }
             return result;
         }
-        public void writeObject(List<User> myObj)
+        public void SaveChanges()
         {
             using (StreamWriter myFile = new StreamWriter(path))
             {
-                myFile.WriteLine(JsonConvert.SerializeObject(myObj));
+                myFile.WriteLine(JsonConvert.SerializeObject(Users));
             }
         }
     }
