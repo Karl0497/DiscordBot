@@ -13,6 +13,7 @@ using HtmlAgilityPack;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using BotTest2.Datas;
+using BotTest2.Commands;
 
 namespace BotTest2
 {
@@ -37,7 +38,7 @@ namespace BotTest2
 
             services = new ServiceCollection()
                 .AddSingleton(Db)
-                .AddSingleton(client)
+                .AddSingleton(client)   
                 .BuildServiceProvider();
             await InstallCommands();
             string token = "Mzk5ODc3OTI5NDM5MzMwMzA2.DX5_cQ.lDQUWxs6hs-jcY2LiCibsG54azw";
@@ -57,7 +58,8 @@ namespace BotTest2
             client.MessageReceived += HandleCommand;
             client.UserJoined += UpdateUser;
             client.Ready += OnReady;
-
+            commands.Log += LogCommand;
+            //await commands.AddModuleAsync()
             await commands.AddModulesAsync(Assembly.GetEntryAssembly());
         }
         private async Task OnReady()
@@ -123,6 +125,14 @@ namespace BotTest2
             Db.Users.Add(u);
             Db.SaveChanges();
 
+        }
+        private Task LogCommand(LogMessage msg)
+        {
+            if (msg.Exception is CommandException command)
+            {
+                Console.WriteLine(command.InnerException);
+            }
+            return Task.CompletedTask;
         }
         private Task Log(LogMessage msg)
         {

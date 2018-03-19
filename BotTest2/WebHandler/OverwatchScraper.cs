@@ -10,41 +10,75 @@ namespace BotTest2.WebHandler
 {
     public class OverwatchViewModel
     {
+        public string BattleTag { get; set; }
         public string Level { get; set; }
-
+        public string RankPoint { get; set; }
+        public string PortraitLink { get; set; }
     }
     static class OverwatchScraper
     {
-
-        public static async Task<OverwatchViewModel> GetOverwatchData()
+        public static HtmlDocument HtmlDoc { get; set; }
+        private static bool IsValidAccount()
+        {
+            var playerPortrait = HtmlDoc.DocumentNode.SelectSingleNode("//img[@class='player-portrait']");
+            if (playerPortrait != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static async Task<OverwatchViewModel> GetOverwatchData(string Uri, string btag)
         {
             HtmlWeb web = new HtmlWeb();
             await Task.Delay(5000);
-            HtmlDocument doc = await web.LoadFromWebAsync("https://playoverwatch.com/en-us/career/pc/Karl-1194");
+            HtmlDoc = await web.LoadFromWebAsync(Uri);
+            if (!IsValidAccount())
+            {
+                return null;
+            }
             return new OverwatchViewModel
             {
-                Level=GetLevel(doc)
+                BattleTag = btag,
+                Level = GetLevel(),
+                RankPoint = GetRankPoint(),
+                PortraitLink = GetPortraitLink()
             };
         }
-        
-       
-       
-        public static string GetLevel(HtmlDocument HtmlDoc)
+
+        public static string GetPortraitLink()
+        {
+            var playerPortrait = HtmlDoc.DocumentNode.SelectSingleNode("//img[@class='player-portrait']");
+            return playerPortrait.GetAttributeValue("src", null); //TODO: replace default value null
+        }
+        public static string GetRankPoint()
+        {
+            var RankPointDiv = HtmlDoc.DocumentNode.SelectSingleNode("//div[@class='competitive-rank']");
+            if (RankPointDiv != null)
+            {
+                return RankPointDiv.InnerText;
+            }
+            return null;
+        }
+        public static string GetLevel()
         {
             int Level = -1;
             var LevelDiv = HtmlDoc.DocumentNode.SelectSingleNode("//div[@class='player-level']//div[@class='u-vertical-center']").InnerText;
-            var RankDiv = HtmlDoc.DocumentNode.SelectSingleNode("//div[@class='player-level']//div[@class='player-rank']").GetAttributeValue("style", null);
-
-            //Remove Extension
-            RankDiv = RankDiv.Replace("_Rank.png)", "");
-            RankDiv = RankDiv.Substring(RankDiv.Length - 18);
-            foreach (var level in Constants.LEVEL_IDS)
+            Level = Convert.ToInt32(LevelDiv);
+            var LevelRankDiv = HtmlDoc.DocumentNode.SelectSingleNode("//div[@class='player-level']//div[@class='player-rank']");
+            if (LevelRankDiv != null)
             {
-                if (level.Value.Contains(Convert.ToInt64(RankDiv,16)))
+                //Remove Extension
+                var LevelRank = LevelRankDiv.GetAttributeValue("style", null).Replace("_Rank.png)", "");
+                LevelRank = LevelRank.Substring(LevelRank.Length - 18);
+                foreach (var level in Constants.LEVEL_IDS)
                 {
-                    Level = level.Key + Convert.ToInt32(LevelDiv);
+                    if (level.Value.Contains(Convert.ToInt64(LevelRank, 16)))
+                    {
+                        Level += level.Key;
+                    }
                 }
             }
+
             return Level.ToString();
         }
     }

@@ -1,1 +1,1 @@
-[{"Id":330498951109410817,"OverwatchProfile":{"BattleTag":"Karl#1194"}}]
+[{"Id":330498951109410817,"OverwatchProfile":{"BattleTag":"Karl#1194","ProfileLink":"https://playoverwatch.com/en-us/career/pc/Karl-1194"}},{"Id":392827175625031690,"OverwatchProfile":null},{"Id":405215752468168704,"OverwatchProfile":null},{"Id":285967754622926858,"OverwatchProfile":null},{"Id":288935320416681985,"OverwatchProfile":null},{"Id":256455801403604992,"OverwatchProfile":null},{"Id":275861365951037440,"OverwatchProfile":null},{"Id":218682149098881024,"OverwatchProfile":null}]
