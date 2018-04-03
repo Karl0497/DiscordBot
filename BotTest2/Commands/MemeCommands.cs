@@ -23,11 +23,7 @@ namespace BotTest2.Commands
         {
             await ReplyAsync("https://www.youtube.com/watch?v=u1ejB4YjgKI");
         }
-        [Command("DoesAndySuck")]
-        public async Task test()
-        {
-            await ReplyAsync("he sucks big dic");
-        }
+       
 
     }
 }

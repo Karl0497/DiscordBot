@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BotTest2": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Key": "Value"
+      }
+    }
+  }
+}

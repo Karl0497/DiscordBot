@@ -31,7 +31,7 @@ namespace BotTest2.Commands
 
 
         [Command("owview", RunMode = RunMode.Async), Summary("View Overwatch profile.")]
-        public async Task View([Remainder, Summary("BattleTag")] string BattleTag = null )
+        public async Task View([Remainder, Summary("BattleTag")] string BattleTag = null)
         {
             using (Context.Channel.EnterTypingState())
             {
@@ -42,7 +42,7 @@ namespace BotTest2.Commands
                 //Default value, when command has no parameter
                 if (BattleTag == null)
                 {
-                    
+
                     if (User.OverwatchProfile == null)
                     {
                         await ReplyAsync("You currently don't have an Overwatch profile");
@@ -89,12 +89,11 @@ namespace BotTest2.Commands
                         Text = "HanzoMain™"
                     }
                 };
-                embedBuilder.AddField("Level", Data.Level);
-                embedBuilder.AddField("Rank points", Data.RankPoint);
+                embedBuilder.AddField("Level", Data.Level, false);
+                embedBuilder.AddField("Rank", Data.RankPoint + " - " + Data.Rank, false);
+
                 Embed Embed = embedBuilder.Build();
-
-
-                await Context.Channel.SendMessageAsync("", false,  Embed);
+                await Context.Channel.SendMessageAsync("", false, Embed);
             }
 
         }
@@ -113,14 +112,10 @@ namespace BotTest2.Commands
             User.OverwatchProfile = new OverwatchProfile
             {
                 BattleTag = BattleTag,
-                ProfileLink = "https://playoverwatch.com/en-us/career/pc/" + BattleTag.Replace("#","-")
+                ProfileLink = "https://playoverwatch.com/en-us/career/pc/" + BattleTag.Replace("#", "-")
             };
             _Db.SaveChanges();
             await ReplyAsync("Account created");
         }
-
-        
-
-
     }
 }

@@ -14,6 +14,7 @@ namespace BotTest2.WebHandler
         public string Level { get; set; }
         public string RankPoint { get; set; }
         public string PortraitLink { get; set; }
+        public string Rank { get; set; }
     }
     static class OverwatchScraper
     {
@@ -41,7 +42,8 @@ namespace BotTest2.WebHandler
                 BattleTag = btag,
                 Level = GetLevel(),
                 RankPoint = GetRankPoint(),
-                PortraitLink = GetPortraitLink()
+                PortraitLink = GetPortraitLink(),
+                Rank = GetRank()
             };
         }
 
@@ -81,5 +83,22 @@ namespace BotTest2.WebHandler
 
             return Level.ToString();
         }
+
+        public static string GetRank()
+        {
+            string[] Ranks = {"Bronze","Silver","Gold","Platinum","Diamond","Master","Grand Master"};
+            var RankImg = HtmlDoc.DocumentNode.SelectSingleNode("//div[@class='competitive-rank']//img");
+            if (RankImg != null)
+            { 
+                string ImgLink = RankImg.GetAttributeValue("src", null); //TODO: replace default value null
+            
+                int RankIndex = Convert.ToInt32(ImgLink.Substring(ImgLink.Length - 5, 1));
+                return Ranks[RankIndex - 1];
+
+            }
+            return null;
+        }
+
+
     }
 }
