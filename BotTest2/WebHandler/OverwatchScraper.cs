@@ -15,6 +15,10 @@ namespace BotTest2.WebHandler
         public string RankPoint { get; set; }
         public string PortraitLink { get; set; }
         public string Rank { get; set; }
+        public string FavouriteHeroImage { get; set; }
+        public string TimePlayed { get; set; }
+        public string GamesWon { get; set; }
+
     }
     static class OverwatchScraper
     {
@@ -43,7 +47,10 @@ namespace BotTest2.WebHandler
                 Level = GetLevel(),
                 RankPoint = GetRankPoint(),
                 PortraitLink = GetPortraitLink(),
-                Rank = GetRank()
+                Rank = GetRank(),
+                FavouriteHeroImage = GetHeroLink(),
+                TimePlayed = GetTimePlayed(),
+                GamesWon = GetGamesWon()
             };
         }
 
@@ -83,22 +90,51 @@ namespace BotTest2.WebHandler
 
             return Level.ToString();
         }
-
         public static string GetRank()
         {
-            string[] Ranks = {"Bronze","Silver","Gold","Platinum","Diamond","Master","Grand Master"};
+            string[] Ranks = { "Bronze", "Silver", "Gold", "Platinum", "Diamond", "Master", "Grand Master" };
             var RankImg = HtmlDoc.DocumentNode.SelectSingleNode("//div[@class='competitive-rank']//img");
             if (RankImg != null)
-            { 
+            {
                 string ImgLink = RankImg.GetAttributeValue("src", null); //TODO: replace default value null
-            
+
                 int RankIndex = Convert.ToInt32(ImgLink.Substring(ImgLink.Length - 5, 1));
                 return Ranks[RankIndex - 1];
 
             }
             return null;
         }
+        public static string GetHeroLink()
+        {
+            var HeroDiv = HtmlDoc.DocumentNode.SelectSingleNode("//div[@data-js='heroMastheadImage']");
+            string HeroName = HeroDiv.GetAttributeValue("data-hero-quickplay", null); //TODO: replace default value null
+            return "https://d1u1mce87gyfbn.cloudfront.net/hero/" + HeroName + "/career-portrait.png";
+        }
+        public static string GetTimePlayed()
+        {
+            return GetTableData("Game", 0);
+        }
+        public static string GetTableData(string TableName, int RowNumber)
+        {
+            var AllTables = HtmlDoc.DocumentNode.SelectNodes("//div[@class='card-stat-block']//table").Take(7); //Each hero (and All Heroes) has 7 cards
+            
+            var Table = AllTables.First(t => t.SelectSingleNode(".//h5").InnerText == TableName);
+            var rows = Table.SelectNodes(".//tbody//tr");
+            
+            
+            if (rows.Count <= RowNumber)
+            {
+                return null;
+            }
 
+            var data = rows[RowNumber].SelectNodes(".//td")[1].InnerText;
+            return data;
+
+        }
+        public static string GetGamesWon()
+        {
+            return GetTableData("Game", 1);
+        }
 
     }
 }

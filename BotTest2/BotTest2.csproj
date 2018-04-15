@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Discord.Net" Version="2.0.0-beta" />
+    <PackageReference Include="FortniteApi" Version="1.2.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.7.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0-preview1-final" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.0-preview1-final" />

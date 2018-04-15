@@ -89,10 +89,13 @@ namespace BotTest2.Commands
                         Text = "HanzoMain™"
                     }
                 };
-                embedBuilder.AddField("Level", Data.Level, false);
-                embedBuilder.AddField("Rank", Data.RankPoint + " - " + Data.Rank, false);
-
+                embedBuilder.AddField("Level", Data.Level,true);
+                embedBuilder.AddField("Rank", Data.RankPoint + " - " + Data.Rank,true);
+                embedBuilder.AddField("Time Played", Data.TimePlayed, true);
+                embedBuilder.AddField("Games Won", Data.GamesWon,true);
+                embedBuilder.ImageUrl = Data.FavouriteHeroImage;
                 Embed Embed = embedBuilder.Build();
+
                 await Context.Channel.SendMessageAsync("", false, Embed);
             }
 

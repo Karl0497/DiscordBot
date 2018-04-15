@@ -4,18 +4,14 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using HtmlAgilityPack;
 
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using BotTest2.Datas;
-using BotTest2.Commands;
 using System.IO;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace BotTest2
@@ -49,8 +45,6 @@ namespace BotTest2
             await InstallCommands();
             await Client.LoginAsync(TokenType.Bot, Token);
             await Client.StartAsync();
-
-
             // Block this task until the program is closed.
             await Task.Delay(-1);
 
@@ -87,13 +81,15 @@ namespace BotTest2
         }
         public async Task HandleCommand(SocketMessage messageParam)
         {
-
+            
             // Don't process the command if it was a System Message
             var message = messageParam as SocketUserMessage;
             if (message == null) return;
             var context = new CommandContext(Client, message);
             // Create a number to track where the prefix ends and the command begins
             int argPos = 0;
+           
+
             // Determine if the message is a command, based on if it starts with '!' or a mention prefix
             if (!(message.HasCharPrefix(Constants.PREFIX, ref argPos) || message.HasMentionPrefix(Client.CurrentUser, ref argPos))) return;
             var result = await Commands.ExecuteAsync(context, argPos, Services);
@@ -151,7 +147,7 @@ namespace BotTest2
             }
             Db = new DbContext();
             string InviteLink = "https://discordapp.com/api/oauth2/authorize?client_id=" + ClientID + "&scope=bot";
-            Console.WriteLine("use this link to invite your bot: " + InviteLink);
+            Console.WriteLine("Use this link to invite your bot: " + InviteLink);
         }
     }
 }
