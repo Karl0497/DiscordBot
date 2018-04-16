@@ -30,17 +30,22 @@ A step by step instruction
 ## Running the bot
 
 If the bot is deployed successfully, you should see the following screen
-![Alt text](bot.png "Title")
+![Bot is running](img/bot.png "Title")  
+For full list of commands, type ``!help``
 
 
-### Overwatch commands
+### Examples
 
-* Register yourself
+* Register yourself with an Overwatch profile
 
 ```
-Give an example
+!owcreate Karl#1194
 ```
-
+* View your Overwatch stats
+```
+!owview
+```
+![Example](img/owview.png "Title")
 ### And coding style tests
 
 Explain what these tests test and why
