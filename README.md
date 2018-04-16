@@ -30,7 +30,7 @@ A step by step instruction
 ## Running the bot
 
 If the bot is deployed successfully, you should see the following screen
-![Alt text](bot.png "Title")
+![Bot is running](img/bot.png "Title")
 
 
 ### Overwatch commands
