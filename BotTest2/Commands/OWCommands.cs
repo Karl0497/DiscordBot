@@ -26,6 +26,7 @@ namespace BotTest2.Commands
         }
         public OWCommands(DbContext Db)
         {
+            
             _Db = Db;
         }
 

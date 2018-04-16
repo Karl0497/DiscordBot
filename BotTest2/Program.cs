@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using BotTest2.Datas;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using FortniteApi;
 
 namespace BotTest2
 {
@@ -97,13 +98,6 @@ namespace BotTest2
             {
                 await context.Channel.SendMessageAsync(result.ErrorReason);
             }
-
-
-
-
-
-
-
         }
         public async Task UpdateUser(SocketGuildUser user)
         {
@@ -143,6 +137,7 @@ namespace BotTest2
                 var jobj = JObject.Parse(file.ReadToEnd());
                 Token = jobj["Token"].ToString();
                 ClientID = jobj["ClientID"].ToString();
+
 
             }
             Db = new DbContext();
