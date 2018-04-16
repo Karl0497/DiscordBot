@@ -27,7 +27,7 @@ A step by step instruction
  
  
 
-## Running the bot
+## Running The Bot
 
 If the bot is deployed successfully, you should see the following screen
 ![Bot is running](img/bot.png "Title")  
@@ -45,45 +45,30 @@ For full list of commands, type ``!help``
 ```
 !owview
 ```
-![Example](img/owview.png "Title")
-### And coding style tests
+<img src="img/owview.png" width="70%">
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [.NET Core 2.0](https://www.microsoft.com/net/download/windows) - Console Application
+* [Discord.NET](https://github.com/RogueException/Discord.Net) - An unofficial .Net wrapper for the Discord API
 
-## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+## Release History
 
-## Versioning
+* **0.5.0** - 16/04/2018
+	* **Added**:
+		* Overwatch commands: ``!owcreate``, ``!owview``
+		* General command: ``!ping``
+  
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Khoa Nguyen** - *Initial work* - [Karl0497](https://github.com/Karl0497)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
