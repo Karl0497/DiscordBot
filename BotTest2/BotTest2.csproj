@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Discord.Net" Version="2.0.0-beta" />
     <PackageReference Include="FortniteApi" Version="1.2.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.7.1" />
@@ -13,10 +19,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.0-preview1-final" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0-preview1-final" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>
