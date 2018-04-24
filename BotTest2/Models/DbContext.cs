@@ -28,6 +28,7 @@ namespace BotTest2.Models
             }
             using (StreamReader file = new StreamReader(path))
             {
+                
                 result = JsonConvert.DeserializeObject<List<User>>(file.ReadToEnd());
                 file.Close();
             }

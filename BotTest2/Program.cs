@@ -30,7 +30,9 @@ namespace BotTest2
         public DiscordSocketClient Client { get; set; }
 
         public static void Main(string[] args)
-            => new Program().MainAsync().GetAwaiter().GetResult();
+        {
+            new Program().MainAsync().GetAwaiter().GetResult();
+        }
 
         public async Task MainAsync()
         {
@@ -46,11 +48,13 @@ namespace BotTest2
             await InstallCommands();
             await Client.LoginAsync(TokenType.Bot, Token);
             await Client.StartAsync();
+
+
             // Block this task until the program is closed.
             await Task.Delay(-1);
 
         }
-        
+
         public async Task InstallCommands()
         {
 
@@ -82,14 +86,14 @@ namespace BotTest2
         }
         public async Task HandleCommand(SocketMessage messageParam)
         {
-            
+
             // Don't process the command if it was a System Message
             var message = messageParam as SocketUserMessage;
             if (message == null) return;
             var context = new CommandContext(Client, message);
             // Create a number to track where the prefix ends and the command begins
             int argPos = 0;
-           
+
 
             // Determine if the message is a command, based on if it starts with '!' or a mention prefix
             if (!(message.HasCharPrefix(Constants.PREFIX, ref argPos) || message.HasMentionPrefix(Client.CurrentUser, ref argPos))) return;
