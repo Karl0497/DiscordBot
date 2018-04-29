@@ -1,5 +1,6 @@
 # Discord Bot
 
+[![MyGet](https://img.shields.io/myget/discord-net/vpre/Discord.Net.svg)](https://www.myget.org/feed/Packages/discord-net)   
 One bot to rule them all. A simple bot for your Discord server that keeps track of Overwatch and Fortnite stats. It also notifies the server when ever someone ranks up in Overwatch or has a win in Fortnite, no need to brag about it on Facebook.
 
 ## Getting Started
@@ -42,7 +43,7 @@ For full list of commands, type ``!help``
 !owcreate Karl#1194
 ```
 * View your Overwatch stats
-```
+``
 !owview
 ```
 <img src="img/owview.png" width="70%">
@@ -55,7 +56,9 @@ For full list of commands, type ``!help``
 
 
 ## Release History
-
+* **0.6.0** - 16/04/2018
+	* **Added**:
+		* Help command. Usage: ``!help``
 * **0.5.0** - 16/04/2018
 	* **Added**:
 		* Overwatch commands: ``!owcreate``, ``!owview``
