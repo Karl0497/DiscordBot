@@ -43,7 +43,7 @@ For full list of commands, type ``!help``
 !owcreate Karl#1194
 ```
 * View your Overwatch stats
-``
+```
 !owview
 ```
 <img src="img/owview.png" width="70%">
