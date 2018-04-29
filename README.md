@@ -56,7 +56,7 @@ For full list of commands, type ``!help``
 
 
 ## Release History
-* **0.6.0** - 16/04/2018
+* **0.6.0** - 30/04/2018
 	* **Added**:
 		* Help command. Usage: ``!help``
 * **0.5.0** - 16/04/2018
