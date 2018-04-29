@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BastionBot.Commands
 {
-    [Name("Help")]
+    [Name("HelpModule")]
     [Remarks("0")]
     public class HelpModule : ModuleBase
     {
@@ -24,7 +24,8 @@ namespace BastionBot.Commands
 
         }
         [Command("help")]
-        [Summary("Show this")]
+        [Summary("``<path>`` can be a category or a specific command. If ``<path>`` is *null*, show all categories")]
+        [Remarks("``!help overwatch``, ``!help owview``")]
         public async Task Help(string path = "")
         {
             path = path.ToLower();
