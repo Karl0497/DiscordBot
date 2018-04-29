@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BotTest2.Models
+namespace BastionSuperBot.Models
 {   
     
     public class OverwatchProfile

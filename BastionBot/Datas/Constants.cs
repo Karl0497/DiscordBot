@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BotTest2.Datas
+namespace BastionSuperBot.Datas
 {
     public static class Constants
     {

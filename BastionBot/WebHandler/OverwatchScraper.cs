@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BotTest2.Datas;
+using BastionSuperBot.Datas;
 using HtmlAgilityPack;
 
-namespace BotTest2.WebHandler
+namespace BastionSuperBot.WebHandler
 {
     public class OverwatchViewModel
     {

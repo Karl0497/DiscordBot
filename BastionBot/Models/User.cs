@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace BotTest2.Models
+namespace BastionSuperBot.Models
 {
  
     public class User

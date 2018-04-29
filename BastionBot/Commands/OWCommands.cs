@@ -1,6 +1,6 @@
-﻿using BotTest2.Models;
+﻿using BastionSuperBot.Models;
 
-using BotTest2.WebHandler;
+using BastionSuperBot.WebHandler;
 using Discord;
 using Discord.Commands;
 using System;
@@ -9,8 +9,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace BotTest2.Commands
+namespace BastionSuperBot.Commands
 {
+    [Name("Overwatch")]
+    [Remarks("1")]
     public class OWCommands : ModuleBase
     {
         private DbContext _Db;
@@ -31,8 +33,10 @@ namespace BotTest2.Commands
         }
 
 
-        [Command("owview", RunMode = RunMode.Async), Summary("View Overwatch profile.")]
-        public async Task View([Remainder, Summary("BattleTag")] string BattleTag = null)
+        [Command("owview", RunMode = RunMode.Async)]
+        [Summary("View Overwatch profile of ``<BattleTag>``, if it is *null*, view your own")]
+        [Remarks("``!owview``, ``!owview Karl#1194``")]
+        public async Task View(string BattleTag = null)
         {
             using (Context.Channel.EnterTypingState())
             {
@@ -97,14 +101,16 @@ namespace BotTest2.Commands
                 embedBuilder.ImageUrl = Data.FavouriteHeroImage;
                 Embed Embed = embedBuilder.Build();
 
-                await Context.Channel.SendMessageAsync("", false, Embed);
+                await ReplyAsync("", false, Embed);
             }
 
         }
 
 
-        [Command("owcreate"), Summary("Create Overwatch profile")]
-        public async Task Create([Remainder, Summary("BattleTag")] string BattleTag)
+        [Command("owcreate")]
+        [Summary("Bind ``<BattleTag>`` to your account to be viewed later by using ``!owview``")]
+        [Remarks("``!owcreate Karl#1194``")]
+        public async Task Create([Remainder] string BattleTag)
         {
             if (!IsValidbattleTag(BattleTag))
             {

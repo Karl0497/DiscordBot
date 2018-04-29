@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace BotTest2.Models
+namespace BastionSuperBot.Models
 {
     public class DbContext
     {

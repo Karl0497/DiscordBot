@@ -1,4 +1,4 @@
-﻿using BotTest2.Models;
+﻿using BastionSuperBot.Models;
 
 using Discord;
 using Discord.Commands;
@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using BotTest2.Datas;
+using BastionSuperBot.Datas;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using FortniteApi;
 
-namespace BotTest2
+namespace BastionSuperBot
 {
     class Program
     {

@@ -1,12 +1,14 @@
-﻿using BotTest2.Models;
+﻿using BastionSuperBot.Models;
 using Discord.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BotTest2.Commands
+namespace BastionSuperBot.Commands
 {
+    [Name("Other")]
+    [Remarks("98")]
     public class GeneralCommands : ModuleBase
     {
         private DbContext _Db;
@@ -16,7 +18,7 @@ namespace BotTest2.Commands
             _Db = Db;
         }
         [Command("ping")]
-
+        [Summary("*Pong!*")]
         public async Task Ping()
         {
             await ReplyAsync("pong");
