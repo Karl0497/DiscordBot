@@ -68,7 +68,7 @@ For full list of commands, type ``!help``
 
 ## Authors
 
-* **Khoa Nguyen** - *Initial work* - [Karl0497](https://github.com/Karl0497)
+[Karl0497](https://github.com/Karl0497)
 
 
 ## License
